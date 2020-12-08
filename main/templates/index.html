@@ -1,0 +1,59 @@
+<!-- 2015244055 김성민 
+메인페이지
+-->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+                {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>선문대학교 셔틀버스</title>
+
+        {% endblock %}
+</head>
+  
+<body>
+    {% block header %}
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active" style="background-image: url('../static/images/bus.jpg')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>First Slide</h3>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('../static/images/bus2.jpg')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>Second Slide</h3>
+          </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('../static/images/images.png')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>Third Slide</h3>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    {% endblock %}
+  
+
+    {% block footer %}
+    
+{% endblock %}  
+  </body>
+</html>

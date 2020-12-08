@@ -1,0 +1,26 @@
+<!-- 2015244055 김성민  
+이메일을 보내진 화면
+-->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+        {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>선문대학교 셔틀버스</title>
+</head>
+{% endblock %}
+<body>
+       
+    {% block header %}
+    <br>
+      	<h4>해당 이메일로 인증을 보냈습니다</h4>
+    <br>
+          {% endblock %}
+    {% block footer %}
+    {% endblock %}  
+  </body>
+</html>

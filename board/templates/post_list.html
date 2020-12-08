@@ -1,0 +1,85 @@
+<!-- 2015244055 김성민 
+자유게시판 목록 페이지
+-->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>선문대학교 셔틀버스</title>
+    <style>
+    .text-btn{
+      font-size:25px;
+      font-weight: 550;
+    }
+    </style>
+{% endblock %}
+</head>
+<body>
+{% block header %}
+<div class="container">
+    <h1 class="mt-4 mb-3"><b>자유게시판</b></h1>          
+    <form action="" method="GET">
+          <input type="text" name="list" style="border:1px solid grey;">
+          <input type="submit" value="글찾기" class = "btn btn-default"  style="border:1px solid grey;">
+    </form>
+  <table class ="table table-hover">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성한 날짜</th>
+            <th>댓글수</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+        <tr>
+            {% for borad in borads %}
+          <td>{{ borad.id }}</td>
+          <td><a href="{% url 'post_detail' borad.id %}">{{ borad.title }}</a></td>
+          <td>{{ borad.author }}</td>
+          <td>{{ borad.created_at }}</td>
+          <td>{{ borad.comments.count }}</td>
+        </tr>
+        </tbody>
+                      {% endfor %}
+
+      </table>
+    <br>
+    <a class = "btn btn-success" href="{% url 'post_create' %}">게시판 생성</a>
+    <br>
+    <br>
+    <div class = "text-center">
+    {% if borads.has_previous %}
+            {% if borads.number > 2 %}
+                <a class="button text-btn" href="?page=1">1</a>
+                &nbsp;
+            {% endif %}
+                <a class="button text-btn" href="?page={{ borads.number|add:-1 }}">{{ borads.number|add:-1 }}</a>
+                &nbsp;
+
+            {% endif %}
+            &nbsp;
+
+            {% if borads.has_next %}
+                <a class="button text-btn" href="?page={{ borads.number|add:1 }}">{{ borads.number|add:1 }}</a>
+            {% if item_page_offset > 1 %}
+            &nbsp;
+                <a class="button text-btn" href="?page={{ borads.paginator.num_pages }}">{{ borads.paginator.num_pages }}</a>
+            {% endif %}
+            {% endif %}
+           </div>
+</div>
+<br>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}  
+</body>
+</html>

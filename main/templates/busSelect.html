@@ -1,0 +1,43 @@
+<!-- 2015244055 김성민
+지역 선택 페이지 -->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+                {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>선문대학교 셔틀버스</title>
+<style>
+.bus-item {
+    padding: 5px 0px 5px 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid blue;
+    font-size: 12px;
+}
+</style>
+        {% endblock %}
+</head>
+  <body>
+        {% block header %}
+        <div class="container">
+                <h2 class="text-center text-uppercase text-secondary mb-0">
+        <strong style="color: black;">지역 선택</strong><span class="process"> > 날짜/시간 > 좌석선택 > 예매완료</span>
+                </h2>
+    <div class="bus">
+        <ul class="bus-list">
+            {% for bus in buss %}
+                <li class="bus-item">
+                    <a href="/{{ user_id }}/reservation/{{bus.busid}}" class="bus-link">{{bus.busname}}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
+</body>
+</html>

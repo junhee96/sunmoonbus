@@ -1,0 +1,52 @@
+<!-- 2015244055 김성민
+좌석 선택 페이지 -->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+                {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>선문대학교 셔틀버스</title>
+<style>
+.seat-btn{
+    text-decoration: none;
+    background-image: url(/static/images/seat.jpg);
+    padding: 3px 10px;color: rgb(0, 0, 0);
+    font-size: 20px;
+    
+}
+
+</style>
+        {% endblock %}
+</head>
+  <body>
+      {% block header %}
+      <div class="container">
+            <h2 class="text-center text-uppercase text-secondary mb-0">
+                    <span class="process">   지역 선택 > 날짜/시간 >  <strong style="color: black;">좌석선택</strong> > 예매완료</span>
+                            </h2>
+                            <br>
+    <center>
+        {% for seat in seats %}
+            {% if seat.status == True %}
+                <a href="" class="seat-btn" onclick="alert('이미 예약된 좌석입니다.')">{{ seat.seatcol }}{{ seat.seatrow }}</a>
+            {% else %}
+                <a href="/{{user_id}}/reservation/{{bus_id}}/{{start_id}}/{{ seat.seatid }}" class="seat-btn">{{ seat.seatcol }}{{ seat.seatrow }}</a>
+            {% endif %}
+            {% if seat.seatrow == 2 %}
+            &nbsp;
+            {% elif seat.seatrow == 4 %}
+                <br>
+            {% endif %}
+        {% endfor %}
+    </center>
+    </div>
+    <br>
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
+</body>
+ </html>

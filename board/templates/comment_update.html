@@ -1,0 +1,41 @@
+<!-- 2015244055 김성민 
+댓글 수정페이지
+-->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+{% block head %}
+  <style>
+
+</style>
+  <title>Full Width Pics - Start Bootstrap Template</title>
+{% endblock %}
+
+</head>
+
+<body>
+    {% block header %}
+    <article>
+        <div class="container" role="main">
+                <br>
+                        <h2>댓글 수정하기</h2>
+                        <br>                
+                        <form action="{% url 'comment_update' comment.id %}" method="POST">
+                            {% csrf_token %}
+                <div class="mb-3">
+                    <label for="content">댓글</label>
+                    <textarea class="form-control" rows="5" name="message" required>{{ comment.message }}</textarea>
+                </div>
+                                   <input class="btn btn-success" type="submit" value="수정">
+
+   </form>
+<br>
+</div>
+
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!-- 2015244055 김성민
+예약내역 페이지 -->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+                {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>선문대학교 셔틀버스</title>
+
+        {% endblock %}
+</head>
+  <body>
+    {% block header %}  
+    <div class="container"><div class="process"><h2 class="text-center text-uppercase text-secondary mb-0">{{ user.name }}님의 예매 내역</h4></div><br>
+    {% for reservation in reservations %}
+        <table >
+            <tr >
+                <th>예매 번호</th>
+                <td >{{ reservation.reservationid }}</td>
+            </tr>
+            <tr>
+                <th >지역 </th>
+                <td >{{ reservation.busid }}</td>        
+            </tr>
+            <tr>
+                <th>날짜/시간</th>
+                <td>{{ reservation.startid }}</td>
+            </tr>
+            <tr>         
+                <th>좌석 번호</th>
+                <td>{{ reservation.seatid }}</td>
+            </tr>
+            <tr>
+                <td rowspan="4" class="cancel" ><a href="/{{ user_id }}/cancel/{{ reservation.reservationid }}" class="cancel-link">예매취소</a></td>
+
+                <td colspan="3"></td>
+            </tr>
+            <hr>
+        </table>
+      
+    {% endfor %}
+</div>
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
+</body>
+ </html>

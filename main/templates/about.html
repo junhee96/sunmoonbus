@@ -1,0 +1,345 @@
+<!-- 2015244055 김성민 
+셔틀버스 시간표 페이지
+-->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>선문대학교 셔틀버스</title>
+    <style>
+       #map {
+        height: 100%;
+      }
+      #map{
+        width:100%;height:350px;
+        }
+
+
+      </style>
+    {% endblock %}
+</head>
+<body id="page-top">
+        {% block header %}  
+        <center style="height: auto !important;">
+  
+             <section  id="weekday">
+                    <div class="container">
+             <h2 class="text-center text-uppercase text-secondary mb-0"> 평일 시간표</h2>
+                      <img class="img-fluid" src="{% static 'images/bustime.png' %}" alt="">
+                     <hr color="blue" size="100">
+                 <h2 class="text-center text-uppercase text-secondary mb-0"> 주말 시간표</h2>
+           
+                 <img class="img-fluid" src="{% static 'images/weekdaybus.png' %}" alt="">
+                 <hr color="blue" size="100">
+                 <h2 class="text-center text-uppercase text-secondary mb-0"> 통학버스 시간표</h2>
+           
+                 <img class="img-fluid" src="{% static 'images/sunmoonbus.png' %}" alt="">
+                 <hr color="blue" size="100">
+                </div>
+                           <h2 class="text-center text-uppercase text-secondary mb-0"> 셔틀장</h2>
+        <div id="map"></div>
+                  </section>
+                  
+       
+
+</center>
+        {% endblock %}
+  
+  
+        {% block footer %}
+ 
+        <div id="map " ></div>
+    
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d37dbee6afa323a8d0775f2d781e96ef"></script>
+        <script>
+        var mapContainer = document.getElementById('map'),   
+            mapOption = { 
+                center: new kakao.maps.LatLng(36.8113899, 127.0048795),
+                level: 8 
+            };
+        
+        var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+        
+
+            var positions = [
+            {
+                content: '<p>천안역</p>', 
+                latlng: new kakao.maps.LatLng(36.810155, 127.143445)
+            },
+            {
+                content: '<p>천안역 -> 하이렉스파</p>', 
+                latlng: new kakao.maps.LatLng(36.800385, 127.124589)
+            },
+            {
+
+                content: '<p>하이렉스파 -> 용암마을</P>', 
+                latlng: new kakao.maps.LatLng(36.801517, 127.117894)
+            },
+            {   
+                content: '<p>선문대학교(아산역) -> 청솔아파트(쌍용동)</p>', 
+                latlng: new kakao.maps.LatLng(36.801233, 127.116282)
+            },
+            {   
+                content: '<p>청솔아파트(쌍용역) -> 하이마트</p>', 
+                latlng: new kakao.maps.LatLng(36.799494, 127.127410)
+            },
+]
+        
+var centerposition=[
+        {
+                content: '<p>선문대학교(아산캠)</p>', 
+                latlng: new kakao.maps.LatLng(36.799657, 127.074834)
+            },
+
+            ]
+
+var AS_positions = [
+            {
+                content: '<p>아산역(지하)</p>',
+                latlng: new kakao.maps.LatLng(36.794551, 127.103711)
+            },
+            {
+                content: '<p>선문대학교(아산캠) -> 펜타포트</p>', 
+                latlng: new kakao.maps.LatLng(36.797163, 127.100317)
+            },            
+         ]
+         var TE_positions = [
+            {
+                content: '<p>선문대학교 -> 불당상업지구 </p>', 
+                latlng: new kakao.maps.LatLng(36.811241, 127.108627)
+            },          
+             {
+                content: '<p>불당상업지구 -> 종합운동장</p>', 
+                latlng: new kakao.maps.LatLng(36.822539, 127.116519)
+            },
+            {
+                content: '<p>종합운동장 -> 백석그린빌</p>', 
+                latlng: new kakao.maps.LatLng(36.823085, 127.121304)
+            },
+            {
+                content: '<p>종합운동장 -> 한방병원 건너편</p>', 
+                latlng: new kakao.maps.LatLng(36.824682, 127.127620)
+            },
+            {
+                content: '<p>한방병원 건너편 -> 스타벅스(성정동)</p>', 
+                latlng: new kakao.maps.LatLng(36.825481, 127.140199)
+            },
+            {
+                content: '<p>스타벅스(성정동) -> 천안 터미널</p>', 
+                latlng: new kakao.maps.LatLng(36.818938, 127.153311)
+            },
+            {
+                content: '<p>천안 터미널 -> 한국전력</p>', 
+                latlng: new kakao.maps.LatLng(36.826242, 127.131476)
+            },
+            {
+                content: '<p>한국전력 -> 홈마트에브리데이</p>', 
+                latlng: new kakao.maps.LatLng(36.823481, 127.121154)
+            },
+            {
+                content: '<p>홈마트에브리데이 -> 종합운동장</p>', 
+                latlng: new kakao.maps.LatLng(36.820704, 127.117390)
+            },
+            {
+                content: '<p>종합운동장 -> 서울대정병원</p>', 
+                latlng: new kakao.maps.LatLng(36.811779, 127.108160)
+            },
+            {
+                content: '<p>서울대정병원 -> 갤러리아 건너편</p>', 
+                latlng: new kakao.maps.LatLng(36.801495, 127.104393)
+            },     
+]
+var YY_positions = [
+
+            {
+                content: '<p>선문대학교(아산캠) -> 중앙하이츠 3차 버스정류장</p>', 
+                latlng: new kakao.maps.LatLng(36.775635, 127.074347)
+            },     
+            {
+                content: '<p>중앙하이츠 3차 버스정류장 -> 장호빌딩 앞</p>', 
+                latlng: new kakao.maps.LatLng(36.774345, 127.054872)
+            },              
+              {
+                content: '<p>장호빌딩 앞 -> 이마트 건너편</p>', 
+                latlng: new kakao.maps.LatLng(36.777408, 127.022254)
+            },              
+             {
+                content: '<p>이마트 건너편 -> 아산터미널</p>', 
+                latlng: new kakao.maps.LatLng(36.784573, 127.014073)
+            },                
+             {
+                content: '<p>아산터미널 -> 온양역</p>', 
+                latlng: new kakao.maps.LatLng(36.783571, 127.005033)
+            },                
+             {
+                content: '<p>온양역 -> KT</p>', 
+                latlng: new kakao.maps.LatLng(36.789277, 127.006758)
+            },                 
+            {
+                content: '<p>KT -> 탕정동사무소</p>', 
+                latlng: new kakao.maps.LatLng(36.798731, 127.060253)
+            },    
+]
+var SS_positions = [
+            {
+                content: '<p>아산역 -> 신방동(GS주유소)</p>', 
+                latlng: new kakao.maps.LatLng(36.789455, 127.128917)
+            },   
+            {
+                content: '<p>신방동(GS주유소) -> 청수동 육교 옆(우리병원)</p>', 
+                latlng: new kakao.maps.LatLng(36.781334, 127.155708)
+            },          
+                  {
+                content: '<p>청수동 육교 옆(우리병원) -> 청수동 육교 옆(우리병원)</p>', 
+                latlng: new kakao.maps.LatLng( 36.770776, 127.164815)
+            },    
+
+        ];
+
+
+        var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+    for (var i = 0; i < positions.length; i ++) {
+        
+        // 마커 이미지의 이미지 크기 입니다
+        var imageSize = new kakao.maps.Size(24, 35); 
+        
+        // 마커 이미지를 생성합니다    
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+        
+        // 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+    map: map,
+    position: positions[i].latlng, 
+    image : markerImage // 마커 이미
+});
+var infowindow = new kakao.maps.InfoWindow({
+    content: positions[i].content 
+});
+
+kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    }
+
+
+    for (var i = 0; i < centerposition.length; i ++) {
+
+var marker = new kakao.maps.Marker({
+    map: map,
+    position: centerposition[i].latlng 
+});
+var infowindow = new kakao.maps.InfoWindow({
+    content: centerposition[i].content 
+});
+
+kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+}
+
+
+        var imageSrc2 = "https://cdn.icon-icons.com/icons2/1935/PNG/512/mapplaceholder_122316.png"; 
+    
+    for (var i = 0; i < AS_positions.length; i ++) {
+        
+        var imageSize = new kakao.maps.Size(24, 35); 
+        
+        var markerImage = new kakao.maps.MarkerImage(imageSrc2, imageSize); 
+        
+        var marker = new kakao.maps.Marker({
+    map: map,
+    position: AS_positions[i].latlng, 
+    image : markerImage 
+});
+var infowindow = new kakao.maps.InfoWindow({
+    content: AS_positions[i].content 
+});
+
+kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    }
+
+    var imageSrc2 = "https://cdn.icon-icons.com/icons2/152/PNG/128/maps_21767.png"; 
+    
+    for (var i = 0; i < TE_positions.length; i ++) {
+        
+        var imageSize = new kakao.maps.Size(24, 35); 
+        
+        var markerImage = new kakao.maps.MarkerImage(imageSrc2, imageSize); 
+        
+        var marker = new kakao.maps.Marker({
+    map: map,
+    position: TE_positions[i].latlng, 
+    image : markerImage
+});
+var infowindow = new kakao.maps.InfoWindow({
+    content: TE_positions[i].content 
+});
+
+kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    }
+
+    var imageSrc3 = "https://cdn.icon-icons.com/icons2/1102/PNG/512/1485969928-17-location_78896.png"; 
+    
+    for (var i = 0; i < YY_positions.length; i ++) {
+        
+        var imageSize = new kakao.maps.Size(24, 35); 
+        
+        var markerImage = new kakao.maps.MarkerImage(imageSrc3, imageSize); 
+        
+        var marker = new kakao.maps.Marker({
+    map: map,
+    position: YY_positions[i].latlng, 
+    image : markerImage
+});
+var infowindow = new kakao.maps.InfoWindow({
+    content: YY_positions[i].content 
+});
+
+kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    }
+
+    var imageSrc4 = "https://cdn.icon-icons.com/icons2/520/PNG/512/Pin-location-point_icon-icons.com_51943.png"; 
+    
+    for (var i = 0; i < SS_positions.length; i ++) {
+        
+        var imageSize = new kakao.maps.Size(24, 35); 
+        
+        var markerImage = new kakao.maps.MarkerImage(imageSrc4, imageSize); 
+        
+        var marker = new kakao.maps.Marker({
+    map: map,
+    position: SS_positions[i].latlng, 
+    image : markerImage
+});
+var infowindow = new kakao.maps.InfoWindow({
+    content: SS_positions[i].content 
+});
+
+kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    }
+
+function makeOverListener(map, marker, infowindow) {
+    return function() {
+        infowindow.open(map, marker);
+    };
+}
+
+function makeOutListener(infowindow) {
+    return function() {
+        infowindow.close();
+    };
+}
+        </script>
+                        
+    {% endblock %}  
+</body>
+</html>

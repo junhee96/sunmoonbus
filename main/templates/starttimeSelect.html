@@ -1,0 +1,43 @@
+<!-- 2015244055 김성민
+날짜 선택 페이지 -->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+                {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>선문대학교 셔틀버스</title>
+<style>
+
+</style>
+        {% endblock %}
+</head>
+  <body>
+    {% block header %}  
+    <div class="container">
+            <h2 class="text-center text-uppercase text-secondary mb-0">
+                    <span class="process"> 지역 선택 > <strong style="color: black;">날짜/시간 </strong>> 좌석선택 > 예매완료</span>
+                            </h2>
+    <table class="bus">
+        {% for date in dates %}
+            <tr class="bus-list">
+                <th class="bus-item">{{ date }}</th>
+                    {% for starttime in starttimes %}
+                            {% if starttime.startdate == date %}
+                                <td class="bus-item"><a href="/{{ user_id }}/reservation/{{bus_id}}/{{starttime.startid}}" class="movie-link">{{ starttime.starttime }}</a></td>
+                            {% endif %}
+                    {% endfor %}
+                </th>
+            </tr>
+           
+        {% endfor %}
+    </table>
+        </div>
+        {% endblock %}
+        {% block footer %}
+        {% endblock %}
+    </body>
+     </html>

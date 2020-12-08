@@ -1,0 +1,135 @@
+<!-- 2015244055 김성민 
+자유게시판 자세히 페이지
+-->
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        {% block head %}
+<style>
+    .btn-danger{
+        color: blue;
+    }
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>선문대학교 셔틀버스</title>
+{% endblock %}
+</head>
+<body>
+{% block header %}
+
+<br>
+<div class="row">
+        <div class="col-xs-2 col-md-2"></div>
+        <div class="col-xs-8 col-md-8">
+            <br>
+        <h2 class="text-center">게시글 보기</h2>
+        <br>
+        <div class="table table-responsive">
+            <table class="table">
+            <tr>
+                <th class="success">글번호</th>
+                <td>{{ post.id }}</td>
+            </tr>
+              
+            
+            <tr>
+                <th class="success">작성자</th>
+                <td>{{ post.author }}</td>
+                 </tr>
+        <tr>
+            <th class="success">작성일</th>
+            <td colspan="3">{{ post.created_at }}</td>
+        
+        </tr>
+            
+            <tr>
+                <th class="success">제목</th>
+                <td colspan="3">{{ post.title }}</td>
+            </tr>
+            
+            <tr>
+                <th class="success">글 내용</th>
+                <td colspan="3">{{ post.content }}</td>
+                {% if post.image.url is not None %}
+<img src="{{ post.image.url }}" alt="" width="150px">
+    {% endif %}
+
+            </tr>
+            
+            <tr>
+                <td colspan="4" class="text-center">
+                    <a href="{% url 'post_update' post.id %}" class="btn btn-warning">수정하기</a>
+    <a href="{% url 'post_delete' post.id %}" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')">삭제하기</a>
+    <a class="btn btn-primary" href="{% url 'post_list' %}">목록보기</a>                </td>
+            </tr>
+        
+           
+
+            
+            </table>
+            <div class="card my-4">
+                    <h5 class="card-header">댓글</h5>
+                    <div class="card-body">
+                            <form action="{% url 'comment_create' post.id %}" method="POST">
+                                    {% csrf_token %}
+                            <input type="text" class="form-group" name="message" required>
+<br>
+                            <input type="submit" class="btn btn-success"  value="답글 쓰기" >
+                                                </form>
+                    </div>
+                </div>
+                <table class="table">
+                        {% for comment in comments %}
+                             
+            <tr>
+                    <th class="success">작성자</th>
+                    <td>{{ comment.author }}</td>
+                     </tr>
+            <tr>
+                             
+            <tr>
+                    <th class="success">댓글 내용</th>
+                    <td>{{ comment.message }}</td>
+                     </tr>
+            <tr>
+                             
+            <tr>
+                    <th class="success">댓글 작성시간</th>
+                    <td>{{ comment.created_at }}</td>
+                     </tr>
+            <tr>
+                    {% if comment.author == request.user %}    
+                    
+            <tr>
+                    <td colspan="3" class="text-center">
+                     <span>
+                    <form action="{% url 'comment_update' comment.id %}" style="    display: inline;" >
+                            <input class="btn btn-warning" type="submit" value="댓글 수정"style="color:blue;">
+                        </form>
+
+                            <form action="{% url 'comment_delete' comment.id %}" method="POST" style="display: inline;">
+                                    {% csrf_token %}
+                                            <input type="submit" value="댓글 삭제" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')" >
+                                        </form>    </span>
+                  </td>
+                </tr>
+                            
+                            
+                                  
+                    {% endif %}
+                    
+{% endfor %} 
+                </table>
+        </div>
+        
+        </div>
+    </div>
+    {% endblock %}
+
+
+</body>
+</html>
